@@ -1,0 +1,37 @@
+
+Mass–Spring Cloth Simulation
+============================
+**Authors:** Nathaniel Fargo
+
+**Abstract**
+------------
+We implement a physically based cloth model treating a rectangular fabric as a 2‑D lattice of point masses connected by ideal springs.  Semi‑implicit Euler integration advances the system in time under gravity, elastic, and damping forces.  The simulation records kinetic, gravitational, and elastic energies every step, demonstrating overall energy dissipation and verifying model stability.  An optional 3‑D animation visually confirms deformation and settling dynamics.
+
+**Methodology**
+---------------
+* Discretise the cloth into an *N*×*M* grid; each node has mass *m*.
+* Structural and shear springs enforce nearest‑neighbor constraints (spring constant *k*; rest length *ℓ*).
+* Damping force −c v prevents perpetual oscillations.
+* Forces: **F** = m **g** + Σ spring forces − c **v**.
+* Time integration: semi‑implicit Euler with step Δt, chosen via empirical stability tests.
+* Energies tracked each step; total energy trends downward (due to damping), validating physics.
+* Optional Matplotlib animation exports *cloth_animation.mp4*.
+
+**Key Results**
+---------------
+* Stable simulation for 15 × 15 grid, Δt = 0.004 s over 2500 steps.
+* Energy plot shows rapid conversion of potential to elastic/kinetic energy, then monotonic decay.
+* Animation demonstrates realistic draping and settling.
+
+**Submitted Files**
+-------------------
+* *cloth_sim.py* – main Python script to run the simulation.
+* *cloth_energies.csv* – sample energy log (generated after running the script).
+* *cloth_energies_plot.png* – energy plot image (auto‑generated).
+* *cloth_animation.mp4* – optional animation (requires `--animate` flag).
+* *project_summary.txt* – this document.
+
+**AI Tool Usage**
+-----------------
+Large language models (OpenAI ChatGPT) and Cursor AI coding assistant provided draft scaffolding for class structures and plotting boilerplate.  Prompts focused on “cloth mass‑spring simulation”, “semi‑implicit Euler energy tracking”, and Matplotlib animation templates.  Significant manual debugging ensued: correcting spring rest‑length definitions, fixing 3‑D axis limits, and tuning damping for stability.  Final code executes without warnings on CPython 3.11, NumPy 1.26, Matplotlib 3.8.
+
